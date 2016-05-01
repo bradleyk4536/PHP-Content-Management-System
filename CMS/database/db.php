@@ -12,10 +12,8 @@ foreach($db as $key => $value){ define(strtoupper($key), $value); }
 
 //	Create connection to database using mysql_connect(localhost, root, password, database name)
 
-$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if(!$connection) { 
 	die("Database connection failed"); 
-} else {
-	echo "Connect to CMS database";
-}
+} 
 ?>

@@ -1,6 +1,7 @@
 <!--DOCTYPE head located in includes folder-->
-
+<?php include "database/db.php"; ?>
 <?php include "partials/header.php"; ?>
+
 
 <!--		Navigation located in includes folder -->
     
