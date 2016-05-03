@@ -1,8 +1,5 @@
 <?php include "partials/admin_header.php" ?>
-
-
     <div id="wrapper">
-
 <?php include "partials/admin_navigation.php" ?>
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -15,10 +12,7 @@
                         </h1>
                         <div class="col-xs-6">
 <!--          Add new category to category table-->
-
-            <?php
-							create_category();
-						?>
+            <?php create_category(); ?>
 <!--                       	Add category form-->
                         	<form action="" method="post">
                         		<div class="form-group">
@@ -26,19 +20,11 @@
                         			<input type="text" name="cat_title" class="form-control">
                         		</div>
                         		<div class="form-group">
-
                         			<input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                         		</div>
                         	</form>
-                <?php
-									if(isset($_GET['edit'])) {
-
-									$cat_id = $_GET['edit'];
-
-										include "partials/update_categories.php";
-									}
-								?>
-
+<!--            Update and include categories                        	-->
+                <?php update_category(); ?>
                         </div>
                         <div class="col-xs-6">
                         	<table class="table table-bordered table-hover">
@@ -49,32 +35,10 @@
                         			</tr>
                         		</thead>
                         		<tbody>
-
-<!--             create rows in table from category query           		-->
-						<?php
-							$query = "SELECT * FROM categories";
-							$select_catagories = mysqli_query($connection, $query);
-							while($row = mysqli_fetch_assoc($select_catagories)) {
-							$cat_id = $row['cat_id'];
-							$cat_title = $row['cat_title'];
-							echo "<tr>";
-							echo "<td>{$cat_id}</td>";
-							echo "<td>{$cat_title}</td>";
-							echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-							echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
-							echo "</tr>";
-							}
-						?>
-<!--                Delete query for categories table       		-->
-            <?php
-							if(isset($_GET['delete'])) {
-								$del_cat_id = $_GET['delete'];
-								$query = "DELETE FROM categories WHERE cat_id = {$del_cat_id} ";
-								$delete_query = mysqli_query($connection, $query);
-//								refresh page so you do not have to click twice
-								header("Location: categories.php");
-							}
-						?>
+<!--             find all categories query           		-->
+						<?php read_categories(); ?>
+<!--                Delete category for table query      		-->
+            <?php delete_category(); ?>
                         		</tbody>
                         	</table>
                         </div>
