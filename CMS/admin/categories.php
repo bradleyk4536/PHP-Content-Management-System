@@ -1,5 +1,6 @@
 <?php include "partials/admin_header.php" ?>
 
+
     <div id="wrapper">
 
 <?php include "partials/admin_navigation.php" ?>
@@ -16,32 +17,9 @@
 <!--          Add new category to category table-->
 
             <?php
-//Check to see if submit button is clicked
-							if(isset($_POST['submit'])) {
-
-//								read the category input field
-
-								$cat_title = $_POST['cat_title'];
-
-//								check to see if field is empty if so echo message
-
-								if($cat_title == "" || empty($cat_title)) {
-									echo "This field should not be empty";
-//									if field is not empty create the insert query
-
-								} else {
-									$query = "INSERT INTO categories(cat_title) ";
-									$query .= "VALUE('{$cat_title}') ";
-
-									$create_category_query = mysqli_query($connection, $query);
-
-//									Test to see if query worked
-									if(!$create_category_query) {
-										die('QUERY FAILE' . mysqli_error($connection));
-									}
-								}
-							}
+							create_category();
 						?>
+<!--                       	Add category form-->
                         	<form action="" method="post">
                         		<div class="form-group">
                         			<label for="cat_title">Add Category</label>
@@ -52,6 +30,15 @@
                         			<input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                         		</div>
                         	</form>
+                <?php
+									if(isset($_GET['edit'])) {
+
+									$cat_id = $_GET['edit'];
+
+										include "partials/update_categories.php";
+									}
+								?>
+
                         </div>
                         <div class="col-xs-6">
                         	<table class="table table-bordered table-hover">
@@ -74,6 +61,7 @@
 							echo "<td>{$cat_id}</td>";
 							echo "<td>{$cat_title}</td>";
 							echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+							echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
 							echo "</tr>";
 							}
 						?>

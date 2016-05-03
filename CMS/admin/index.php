@@ -2,8 +2,6 @@
 
     <div id="wrapper">
 
-
-
 <?php include "partials/admin_navigation.php" ?>
 
         <div id="page-wrapper">

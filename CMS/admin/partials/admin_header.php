@@ -1,5 +1,6 @@
 <?php ob_start(); ?> <!--buffers request in scripts -->
-<?php include "../database/db.php" ?>
+<?php include "../database/db.php"; ?>
+<?php include "functions.php"; ?>
 
 
 <!DOCTYPE html>
