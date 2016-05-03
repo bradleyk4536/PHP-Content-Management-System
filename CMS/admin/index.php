@@ -1,10 +1,10 @@
-<?php include "partials/header.php" ?>
+<?php include "partials/admin_header.php" ?>
 
     <div id="wrapper">
 
 
 
-<?php include "partials/navigation.php" ?>
+<?php include "partials/admin_navigation.php" ?>
 
         <div id="page-wrapper">
 
@@ -29,4 +29,4 @@
 
     </div>
     <!-- /#wrapper -->
-<?php include "partials/footer.php" ?>
+<?php include "partials/admin_footer.php" ?>
