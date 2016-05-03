@@ -1,3 +1,4 @@
+<?php ob_start(); ?> <!--buffers request in scripts -->
 <?php include "../database/db.php" ?>
 
 
