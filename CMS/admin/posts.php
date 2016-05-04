@@ -29,9 +29,15 @@
 								include "partials/add_posts.php";
 							break;
 
+							case 'edit_post';
+								include "partials/edit_posts.php";
+							break;
+
 
 							default: 	include "partials/view_all_posts.php";
 						}
+
+
 
 			?>
 

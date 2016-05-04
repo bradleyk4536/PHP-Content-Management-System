@@ -1,6 +1,7 @@
 <?php ob_start(); ?> <!--buffers request in scripts -->
 <?php include "../database/db.php"; ?>
-<?php include "functions.php"; ?>
+<?php include "category_crud_functions.php"; ?>
+<?php include "post_crud_functions.php"; ?>
 
 
 <!DOCTYPE html>

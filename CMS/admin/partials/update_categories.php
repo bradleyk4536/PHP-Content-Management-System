@@ -1,7 +1,7 @@
 <!--                       	Update category form-->
-                        	<form action="" method="post">
-                        		<div class="form-group">
-                        			<label for="cat_title">Update Category</label>
+<form action="" method="post">
+  <div class="form-group">
+    <label for="cat_title">Update Category</label>
 
             <?php
 							if(isset($_GET['edit'])) {
