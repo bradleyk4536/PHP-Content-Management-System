@@ -6,7 +6,6 @@ if(isset($_GET['p_id'])) {
 	$update_query_id = $_GET['p_id'];
 
 }
-
 					$query = "SELECT * FROM posts WHERE post_id = $update_query_id ";
 					$select_posts_by_id = mysqli_query($connection, $query);
 
@@ -22,7 +21,6 @@ if(isset($_GET['p_id'])) {
 						$post_comments = $row['post_comment_count'];
 						$post_date = $row['post_date'];
 					}
-
 	if(isset($_POST['create_post'])) {
 
 					$post_title = $_POST['title'];
@@ -57,10 +55,7 @@ if(isset($_GET['p_id'])) {
 					$update_post_query .="post_content = '{$post_content}', ";
 					$update_post_query .="post_image = '{$post_image}' ";
 					$update_post_query .= "WHERE post_id = {$update_query_id} ";
-
-
 					$update_post = mysqli_query($connection, $update_post_query);
-
 					confirm($update_post);
 	}
 ?>
@@ -73,19 +68,9 @@ if(isset($_GET['p_id'])) {
 
 	<div class="form-group">
 	<select name="post_category" id="">
-		<?php
-			$query = "SELECT * FROM categories ";
-			$select_catagories = mysqli_query($connection, $query);
-			confirm(	$select_catagories);
 
-			while($row = mysqli_fetch_assoc($select_catagories)) {
-			$cat_id = $row['cat_id'];
-			$cat_title = $row['cat_title'];
-
-				echo "<option value='$cat_id'>{$cat_title}</option>";
-			}
-
-		?>
+<!--		populate category dropdown -->
+		<?php populate_category_dropdown(); ?>
 
 	</select>
 	</div>

@@ -11,7 +11,6 @@
 					<small>Author</small>
         </h1>
 <!--        conditional view all post from partials-->
-
 			<?php
 
 					if(isset($_GET['source'])) {
@@ -33,12 +32,8 @@
 								include "partials/edit_posts.php";
 							break;
 
-
 							default: 	include "partials/view_all_posts.php";
 						}
-
-
-
 			?>
 
 				</div>
