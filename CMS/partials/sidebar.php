@@ -28,7 +28,10 @@
 									<?php
 										while($row = mysqli_fetch_assoc($select_catagories_sidebar)) {
 										$cat_title = $row['cat_title'];
-										echo "<li><a href='#'>{$cat_title}</a></li>";
+										$cat_id = $row['cat_id'];
+
+//											The href contains the cat_id from the category table when click it is opens the category.php page
+										echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
 										}
 									?>
 								</ul>

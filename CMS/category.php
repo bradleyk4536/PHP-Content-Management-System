@@ -4,8 +4,8 @@
 
 
 <!--		Navigation located in includes folder -->
-    
-<?php include "partials/navigation.php"; ?>    
+
+<?php include "partials/navigation.php"; ?>
 
     <!-- Page Content -->
 <div class="container">
@@ -16,7 +16,13 @@
 			<div class="col-md-8">
 
 					<?php
-						$query = "SELECT * FROM posts";
+
+//				Then this page is displayed the $_GET super global captures the URL category id and then it is saved into the $post_category_id variable. It is then sent to the $query where it selects all the post from a given category
+
+				if(isset($_GET['category'])){ $post_category_id = $_GET['category']; }
+
+
+						$query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
 						$select_all_post_query = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
 						$post_id = $row['post_id'];
@@ -24,8 +30,6 @@
 						$post_author = $row['post_author'];
 						$post_date = $row['post_date'];
 						$post_image = $row['post_image'];
-
-//							truncate text using substr function
 						$post_content = substr($row['post_content'],0,100);
 					?>
 					<h1 class="page-header">
@@ -45,7 +49,7 @@
 					<hr>
 					<p> <?php echo $post_content ?> </p>
 					<a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-					<hr>							
+					<hr>
 				<?php	} ?>
 
 
@@ -53,7 +57,7 @@
 
 				<!-- Blog Sidebar Widgets Column -->
 
-				<?php include "partials/sidebar.php"; ?> 
+				<?php include "partials/sidebar.php"; ?>
 
 
 				<!--  End side bar-->
@@ -63,7 +67,7 @@
 
         <hr>
         <!--Footer located in includes folder-->
-        
+
 				<?php include "/partials/footer.php"; ?>
-				
-				
+
+
