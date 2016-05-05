@@ -35,7 +35,6 @@
 							default: 	include "partials/view_all_posts.php";
 						}
 			?>
-
 				</div>
 			</div>
 				<!-- /.row -->

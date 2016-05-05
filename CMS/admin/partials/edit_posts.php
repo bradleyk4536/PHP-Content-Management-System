@@ -23,8 +23,8 @@ if(isset($_GET['p_id'])) {
 					}
 	if(isset($_POST['create_post'])) {
 
-					$post_title = $_POST['title'];
-					$post_author = $_POST['author'];
+					$post_title = $_POST['post_title'];
+					$post_author = $_POST['post_author'];
 					$post_category_id = $_POST['post_category'];
 					$post_status = $_POST['post_status'];
 
@@ -32,13 +32,14 @@ if(isset($_GET['p_id'])) {
 					$post_image_temp = $_FILES['post_image']['tmp_name'];
 
 					$post_content = $_POST['post_content'];
-					$post_tags = $_POST['post_content'];
+					$post_tags = $_POST['post_tags'];
 
 					move_uploaded_file($post_image_temp, "../images/$post_image");
 
 //				retain image after update
 					if(empty($post_image)) {
-						$query = "SELECT * FROM post WHERE post_id = $update_query_id ";
+
+						$query = "SELECT * FROM posts WHERE post_id = $update_query_id ";
 						$select_image = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_array($select_image)) {
 							$post_image = $row['post_image'];
@@ -57,27 +58,38 @@ if(isset($_GET['p_id'])) {
 					$update_post_query .= "WHERE post_id = {$update_query_id} ";
 					$update_post = mysqli_query($connection, $update_post_query);
 					confirm($update_post);
+
 	}
 ?>
 	<form action="" method="post" enctype="multipart/form-data">
 
 	<div class="form-group">
 	<label for="title">Post Title</label>
-	<input type="text" class="form-control" name="title" value="<?php echo $post_title; ?>">
+	<input type="text" class="form-control" name="post_title" value="<?php echo $post_title; ?>">
 	</div>
 
 	<div class="form-group">
 	<select name="post_category" id="">
 
 <!--		populate category dropdown -->
-		<?php populate_category_dropdown(); ?>
+		<?php
+			$query = "SELECT * FROM categories ";
+			$select_catagories = mysqli_query($connection, $query);
+			confirm(	$select_catagories);
+			while($row = mysqli_fetch_assoc($select_catagories)) {
+			$cat_id = $row['cat_id'];
+			$cat_title = $row['cat_title'];
+			echo "<option value='$cat_id'>{$cat_title}</option>";
+			}
+
+		?>
 
 	</select>
 	</div>
 
 	<div class="form-group">
 	<label for="author">Post Author</label>
-	<input type="text" class="form-control" name="author" value="<?php echo $post_author; ?>">
+	<input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>">
 	</div>
 
 	<div class="form-group">
