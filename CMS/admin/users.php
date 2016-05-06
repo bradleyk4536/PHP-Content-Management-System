@@ -25,14 +25,14 @@
 						switch($source) {
 
 							case 'add_post';
-								include "partials/add_comment.php";
+								include "partials/add_user.php";
 							break;
 
 							case 'edit_post';
-								include "partials/edit_comment.php";
+								include "partials/edit_user.php";
 							break;
 
-							default: 	include "partials/view_all_comments.php";
+							default: 	include "partials/view_all_users.php";
 						}
 			?>
 				</div>
