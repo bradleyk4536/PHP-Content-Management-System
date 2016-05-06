@@ -41,7 +41,20 @@
 //					}
 						echo "<td>{$comment_email}</td>";
 						echo "<td>{$comment_status}</td>";
-						echo "<td>SOME TITLE</td>";
+
+//						associate a comment to a given post using the $comment_post_id
+						$query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
+						$select_post_id_query = mysqli_query($connection, $query);
+						while($row = mysqli_fetch_assoc($select_post_id_query)){
+
+							$post_id = $row['post_id'];
+							$post_title = $row['post_title'];
+
+//remember to link to a given post you have to get the id of the post which incase is $post_id
+							echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
+						}
+
+
 						echo "<td>{$comment_date}</td>";
 						echo "<td><a href='posts.php?source=edit_post&p_id='>Approved</a></td>";
 						echo "<td><a href='posts.php?delete='>Unapproved</a></td>";
