@@ -28,7 +28,7 @@
 								include "partials/add_user.php";
 							break;
 
-							case 'edit_edit';
+							case 'edit_user';
 								include "partials/edit_user.php";
 							break;
 
