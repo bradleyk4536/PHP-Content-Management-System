@@ -71,20 +71,23 @@ if(isset($_GET['p_id'])) {
 	<div class="form-group">
 	<select name="post_category" id="">
 
-<!--		populate category dropdown -->
-		<?php
-			$query = "SELECT * FROM categories ";
-			$select_catagories = mysqli_query($connection, $query);
-			confirm(	$select_catagories);
-			while($row = mysqli_fetch_assoc($select_catagories)) {
-			$cat_id = $row['cat_id'];
-			$cat_title = $row['cat_title'];
-			echo "<option value='$cat_id'>{$cat_title}</option>";
-			}
+<div class="form-group">
+			<select name="user_role" id="">
 
-		?>
+		<!--		populate category dropdown -->
+				<?php
+					$query = "SELECT * FROM users ";
+					$select_users = mysqli_query($connection, $query);
+					confirm($select_users);
+					while($row = mysqli_fetch_assoc($select_users)) {
+					$user_id = $row['user_id'];
+					$cat_title = $row['user_role'];
+					echo "<option value='$user_id'>{$user_role}</option>";
+					}
 
-	</select>
+				?>
+
+			</select>
 	</div>
 
 	<div class="form-group">
