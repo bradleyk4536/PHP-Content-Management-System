@@ -15,6 +15,27 @@
 						</form> <!--End search form-->
 						<!-- /.input-group -->
 				</div>
+
+				<!-- Login -->
+				<div class="well">
+						<h4>Login</h4>
+<!--						Search form-->
+						<form action="partials/login.php" method="post">
+							<div class="form-group">
+								<input name="username" type="text" class="form-control" placeholder="Enter username">
+
+						</div>
+						<div class="input-group">
+								<input name="password" type="password" class="form-control" placeholder="Enter password">
+								<span class="input-group-btn">
+									<button class="btn btn-primary" name="login" type="submit">Submit</button>
+								</span>
+						</div>
+						</form> <!--End search form-->
+						<!-- /.input-group -->
+				</div>
+
+
 				<!-- Blog Categories Well -->
 				<div class="well">
 					<?php
@@ -30,7 +51,7 @@
 										$cat_title = $row['cat_title'];
 										$cat_id = $row['cat_id'];
 
-//											The href contains the cat_id from the category table when click it is opens the category.php page
+// The href contains the cat_id from the category table when click it is opens the category.php page
 										echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
 										}
 									?>

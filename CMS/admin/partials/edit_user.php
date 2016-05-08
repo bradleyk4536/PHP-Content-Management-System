@@ -1,10 +1,6 @@
-
 <?php
-
 if(isset($_GET['edit_user'])) {
-
 	 $edit_user_id = $_GET['edit_user'];
-
 					$query = "SELECT * FROM users WHERE user_id =  $edit_user_id ";
 					$edit_users = mysqli_query($connection, $query);
 					while($row = mysqli_fetch_assoc($edit_users)) {
@@ -19,18 +15,13 @@ if(isset($_GET['edit_user'])) {
 					}
 	}
 	if(isset($_POST['edit_user'])) {
-
 					$user_firstname = $_POST['user_firstname'];
 					$user_lastname = $_POST['user_lastname'];
 					$user_role = $_POST['user_role'];
 					$username = $_POST['username'];
-
 					$user_email = $_POST['user_email'];
 					$user_password = $_POST['user_password'];
-
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
-
-
 					$update_user_query = "UPDATE users SET ";
 					$update_user_query .="user_firstname = '{$user_firstname}', ";
 					$update_user_query .="user_lastname = '{$user_lastname}', ";
@@ -41,8 +32,6 @@ if(isset($_GET['edit_user'])) {
 					$update_user_query .= "WHERE user_id = {$edit_user_id} ";
 					$update_user = mysqli_query($connection, $update_user_query);
 					confirm($update_user);
-
-
 	}
 ?>
 	<form action="" method="post" enctype="multipart/form-data">
@@ -51,18 +40,13 @@ if(isset($_GET['edit_user'])) {
 		<label for="author">First Name</label>
 		<input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname; ?>">
 		</div>
-
 		<div class="form-group">
 		<label for="post_status">Last Name</label>
 		<input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname; ?>">
 		</div>
-
-
-
 		<div class="form-group">
 			<select name="user_role" id="">
 				<option value="subscriber"><?php echo $user_role; ?> </option>
-
 					<?php
 					if($user_role == 'admin') {
 						echo "<option value='subscriber'>subscriber</option>";

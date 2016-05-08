@@ -3,6 +3,17 @@
 <?php include "category_crud_functions.php"; ?>
 <?php include "post_crud_functions.php"; ?>
 
+<!--/turn on sessions for use-->
+
+<?php session_start(); ?>
+
+<?php
+	if(!isset($_SESSION['user_role'])) {
+
+		header("Location: ../index.php");
+
+	}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
