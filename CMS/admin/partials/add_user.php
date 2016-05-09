@@ -16,6 +16,9 @@
 		$query .= "VALUES('{$user_firstname}', '{$user_lastname}', '{$user_role}', '{$username}', '{$user_email}', '{$user_password}' )";
 		$create_user_query = mysqli_query($connection, $query);
 		confirm($create_user_query);
+
+			echo "<div class='alert alert-success alert-dismissable' role='alert'>
+			 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>USER SUCCESSFULLY CREATED</strong></div>";
 	}
 ?>
 	<form action="" method="post" enctype="multipart/form-data">

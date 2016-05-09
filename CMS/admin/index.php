@@ -136,6 +136,65 @@
     </div>
 </div>
                 <!-- /.row -->
+ 							<?php
+
+//							display how many draft post in database
+								$query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+								$select_all_draft_posts = mysqli_query($connection, $query);
+								$post_draft_count = mysqli_num_rows($select_all_draft_posts);
+
+
+//							display how many draft post in database
+								$query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
+								$unapproved_comments = mysqli_query($connection, $query);
+								$unapproved_comments_count = mysqli_num_rows($unapproved_comments);
+
+
+//							display how many draft post in database
+								$query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
+								$select_all_subscribers = mysqli_query($connection, $query);
+								$subscribers_count = mysqli_num_rows($select_all_subscribers);
+							?>
+
+<!--                Using google charts to display database status-->
+        <div class="row">
+        	<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+
+          ['Date', 'Count'],
+
+					<?php
+						$element_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+						$element_count = [$post_counts, $post_draft_count, $get_comment_count, $unapproved_comments_count, $get_user_count, $subscribers_count, $get_category_count];
+
+					for($i = 0; $i < 7; $i++) {
+
+						echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+					}
+					?>
+
+        ]);
+
+        var options = {
+          chart: {
+            title: '',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
+        <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
+
+        </div>
             </div>
             <!-- /.container-fluid -->
 
