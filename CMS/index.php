@@ -34,10 +34,6 @@
 //
 //								echo "<h1 class='text-centered'>NO POST SORRY</h1>";
 //							} else {
-//
-//
-//
-
 					?>
 					<h1 class="page-header">
 							Page Heading
