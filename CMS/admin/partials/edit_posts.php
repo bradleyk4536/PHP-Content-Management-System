@@ -45,7 +45,6 @@ if(isset($_GET['p_id'])) {
 							$post_image = $row['post_image'];
 						}
 					}
-
 					$update_post_query = "UPDATE posts SET ";
 					$update_post_query .="post_title = '{$post_title}', ";
 					$update_post_query .="post_category_id = '{$post_category_id}', ";
@@ -59,8 +58,12 @@ if(isset($_GET['p_id'])) {
 					$update_post = mysqli_query($connection, $update_post_query);
 					confirm($update_post);
 
+				echo "<div class='alert alert-success alert-dismissable' role='alert'>
+			  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>POST SUCCESSFULLY UPDATED</strong></div>";
 	}
 ?>
+
+
 	<form action="" method="post" enctype="multipart/form-data">
 
 	<div class="form-group">
@@ -109,6 +112,7 @@ if(isset($_GET['p_id'])) {
 	</select>
 
 	</div>
+		</div>
 
 
 <!--
