@@ -137,9 +137,14 @@
 </div>
                 <!-- /.row -->
  							<?php
+//							display how many published post in database
+
+								$query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+								$select_all_published_posts = mysqli_query($connection, $query);
+								$post_published_count = mysqli_num_rows($select_all_published_posts);
 
 //							display how many draft post in database
-								$query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+								$query = "SELECT * FROM posts WHERE post_status = 'Draft' ";
 								$select_all_draft_posts = mysqli_query($connection, $query);
 								$post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
@@ -167,10 +172,10 @@
           ['Date', 'Count'],
 
 					<?php
-						$element_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
-						$element_count = [$post_counts, $post_draft_count, $get_comment_count, $unapproved_comments_count, $get_user_count, $subscribers_count, $get_category_count];
+						$element_text = ['All Posts','Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+						$element_count = [$post_counts, $post_published_count, $post_draft_count, $get_comment_count, $unapproved_comments_count, $get_user_count, $subscribers_count, $get_category_count];
 
-					for($i = 0; $i < 7; $i++) {
+					for($i = 0; $i < 8; $i++) {
 
 						echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
 					}

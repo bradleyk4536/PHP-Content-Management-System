@@ -81,21 +81,40 @@ if(isset($_GET['p_id'])) {
 			$cat_title = $row['cat_title'];
 			echo "<option value='$cat_id'>{$cat_title}</option>";
 			}
-
 		?>
-
 	</select>
 	</div>
-
 	<div class="form-group">
 	<label for="author">Post Author</label>
 	<input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>">
 	</div>
-
 	<div class="form-group">
 	<label for="post_status">Post Status</label>
+	<div class="form-group">
+		<select name="post_status" id="" class="form-control">
+		<option value='<?php echo $post_status ?>'><?php echo $post_status ?></option>
+
+		<?php
+			if($post_status == 'published') {
+
+				echo "<option value='Draft'>Draft</option>";
+
+			} else {
+
+				echo "<option value='Published'>Published</option>";
+			}
+			?>
+
+
+	</select>
+
+	</div>
+
+
+<!--
 	<input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
 	</div>
+-->
 
 	<div class="form-group">
 	<img src="../images/<?php echo $post_image; ?>" alt="" width= 100>
