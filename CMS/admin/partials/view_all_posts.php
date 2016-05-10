@@ -1,6 +1,54 @@
+<?php
+	if(isset($_POST['checkBoxArray'])) {
+
+		foreach($_POST['checkBoxArray'] as $postValueId) {
+
+			$bulk_options = $_POST['bulk_options'];
+
+			switch($bulk_options) {
+
+				case 'Published':
+					$query = "UPDATE posts SET post_status = '{$bulk_options}' ";
+					$query .= "WHERE post_id = {$postValueId} ";
+					$update_publish_status = mysqli_query($connection, $query);
+					confirm($update_publish_status);
+					break;
+
+				case 'Draft':
+					$query = "UPDATE posts SET post_status = '{$bulk_options}' ";
+					$query .= "WHERE post_id = {$postValueId} ";
+					$update_draft_staus = mysqli_query($connection, $query);
+					confirm($update_draft_staus);
+					break;
+
+				case 'Delete':
+					$query = "DELETE FROM posts WHERE post_id = {$postValueId} ";
+					$delete_post = mysqli_query($connection, $query);
+					confirm($delete_post);
+				break;
+			}
+		}
+	}
+?>
+<form action="" method="post">
+
+<div id="bulkOptionContainer" class="col-xs-4">
+	<select name="bulk_options" id="" class="form-control">
+		<option value="">Select Options</option>
+		<option value="Published">Publish</option>
+		<option value="Draft">Draft</option>
+		<option value="Delete">Delete</option>
+	</select>
+</div>
+	<div class="col-xs-4">
+		<input type="submit" class="btn btn-success" name="submit" value="Apply">
+		<a href="add.post.php" class="btn btn-primary">Add New</a>
+	</div>
+
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
+				<th><input id="selectAllBoxes" type="checkbox"></th>
 				<th>Id</th>
 				<th>Author</th>
 				<th>Title</th>
@@ -29,6 +77,10 @@
 	$post_comments = $row['post_comment_count'];
 	$post_date = $row['post_date'];
 		echo "<tr>";
+		?>
+		<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id ?>'></td>
+
+		<?php
 		echo "<td>{$post_id}</td>";
 		echo "<td>{$post_author}</td>";
 		echo "<td>{$post_title}</td>";
@@ -51,6 +103,7 @@
 ?>
 		</tbody>
 	</table>
+</form>
 <!--					Delete function-->
 					<?php
 
