@@ -1,3 +1,6 @@
+
+
+
 <?php
 		if(isset($_POST['create_post'])) {
 		$post_title = $_POST['title'];

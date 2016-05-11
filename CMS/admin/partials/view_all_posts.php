@@ -42,7 +42,7 @@
 </div>
 	<div class="col-xs-4">
 		<input type="submit" class="btn btn-success" name="submit" value="Apply">
-		<a href="add.post.php" class="btn btn-primary">Add New</a>
+		<a href="posts.php?source=add_post" class="btn btn-primary">Add New</a>
 	</div>
 
 	<table class="table table-bordered table-hover">
@@ -58,6 +58,7 @@
 				<th>Tags</th>
 				<th>Comments</th>
 				<th>Date</th>
+				<th>View Post</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
@@ -96,6 +97,7 @@
 		echo "<td>{$post_tags}</td>";
 		echo "<td>{$post_comments}</td>";
 		echo "<td>{$post_date}</td>";
+		echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
 		echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
 		echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
 		echo "</tr>";
