@@ -33,6 +33,9 @@
 			$db_user_lastname = $row['user_lastname'];
 			$db_user_role = $row['user_role'];
 		}
+//		decrypt password for login
+			$password = crypt($password, $db_user_password);
+
 //		check username and password in database with username and password entered
 
 		if($username !== $db_username && $password !== $db_user_password) {
