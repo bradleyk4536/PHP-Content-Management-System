@@ -21,6 +21,17 @@ if(isset($_GET['edit_user'])) {
 					$username = $_POST['username'];
 					$user_email = $_POST['user_email'];
 					$user_password = $_POST['user_password'];
+
+		//get salt from database
+					$salt_query = "SELECT randSalt FROM users ";
+					$get_rand_salt = mysqli_query($connection, $salt_query);
+					if(!$get_rand_salt){
+						die("Query FAILED" . mysqli_error($connection));
+					}
+					$row = mysqli_fetch_array($get_rand_salt);
+					$salt = $row['randSalt'];
+					$hash_password = crypt($user_password, $salt);
+
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
 					$update_user_query = "UPDATE users SET ";
 					$update_user_query .="user_firstname = '{$user_firstname}', ";
@@ -28,11 +39,13 @@ if(isset($_GET['edit_user'])) {
 					$update_user_query .="user_role = '{$user_role}', ";
 					$update_user_query .="username = '{$username}', ";
 					$update_user_query .="user_email = '{$user_email}', ";
-					$update_user_query .="user_password = '{$user_password}' ";
+					$update_user_query .="user_password = '{$hash_password}' ";
 					$update_user_query .= "WHERE user_id = {$edit_user_id} ";
 					$update_user = mysqli_query($connection, $update_user_query);
 					confirm($update_user);
 	}
+
+
 ?>
 	<form action="" method="post" enctype="multipart/form-data">
 
@@ -46,7 +59,7 @@ if(isset($_GET['edit_user'])) {
 		</div>
 		<div class="form-group">
 			<select name="user_role" id="">
-				<option value="subscriber"><?php echo $user_role; ?> </option>
+				<option value="<?php echo $user_role; ?>"><?php echo $user_role; ?> </option>
 					<?php
 					if($user_role == 'admin') {
 						echo "<option value='subscriber'>subscriber</option>";
@@ -55,8 +68,6 @@ if(isset($_GET['edit_user'])) {
 					}
 
 					?>
-
-
 			</select>
 		</div>
 
