@@ -32,10 +32,6 @@
 //
 							if($post_status == 'published') {}
 								?>
-					<h1 class="page-header">
-							Page Heading
-							<small>Secondary Text</small>
-					</h1>
 					<!-- First Blog Post -->
 					<h2>
 							<a href="post.php?p_id=<?php echo $post_id; ?>"> <?php echo $post_title ?> </a>

@@ -6,7 +6,6 @@
 								<th>Comments</th>
 								<th>Email</th>
 								<th>Status</th>
-								<th>In Response to</th>
 								<th>Date</th>
 								<th>Approved</th>
 								<th>Unapproved</th>
@@ -41,6 +40,7 @@
 //					}
 						echo "<td>{$comment_email}</td>";
 						echo "<td>{$comment_status}</td>";
+						echo "<td>{$comment_date}</td>";
 
 //						associate a comment to a given post using the $comment_post_id
 						$query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
@@ -51,11 +51,11 @@
 							$post_title = $row['post_title'];
 
 //remember to link to a given post you have to get the id of the post which incase is $post_id
-							echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
+//							echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
 						}
 
 
-						echo "<td>{$comment_date}</td>";
+
 						echo "<td><a href='comments.php?approved=$comment_id'>Approved</a></td>";
 						echo "<td><a href='comments.php?unapproved=$comment_id'>Unapproved</a></td>";
 						echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
