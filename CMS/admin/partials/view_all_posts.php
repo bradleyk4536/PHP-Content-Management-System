@@ -144,7 +144,7 @@
 							header("location: posts.php");
 						}
 						?>
-
+<!--Reset a record counter -->
 						<?php
 							if(isset($_GET['reset'])) {
 
@@ -155,5 +155,4 @@
 								confirm($reset_query);
 								header("Location: posts.php");
 							}
-
 						?>

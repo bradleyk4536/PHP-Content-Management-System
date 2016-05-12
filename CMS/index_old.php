@@ -4,8 +4,8 @@
 
 
 <!--		Navigation located in includes folder -->
-    
-<?php include "partials/navigation.php"; ?>    
+
+<?php include "partials/navigation.php"; ?>
 
     <!-- Page Content -->
 <div class="container">
@@ -16,25 +16,7 @@
 			<div class="col-md-8">
 
 					<?php
-//				pagination system
-//				get total posts
-						$post_count_query = "SELECT * FROM posts ";
-						$find_count = mysqli_query($connection, $post_count_query);
-						$count = mysqli_num_rows($find_count);
-
-						$count = ceil($count / 5);
-						if(isset($_GET['page'])) {
-							$page = $_GET['page'];
-						} else {
-							$page = "";
-						}
-						if($page == "" || $page == 1) {
-							$page_1 = 0;
-						} else {
-							$page_1 = ($page * 5) - 5;
-						}
-
-						$query = "SELECT * FROM posts LIMIT $page_1, 5 ";
+						$query = "SELECT * FROM posts ";
 						$select_all_post_query = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
 						$post_id = $row['post_id'];
@@ -48,10 +30,9 @@
 
 						$post_status = $row['post_status'];
 //
-							if($post_status == 'Published') {
+							if($post_status == 'published') {}
 								?>
 					<!-- First Blog Post -->
-					<h1><?php echo $count ?></h1>
 					<h2>
 							<a href="post.php?p_id=<?php echo $post_id; ?>"> <?php echo $post_title ?> </a>
 					</h2>
@@ -66,43 +47,25 @@
 					<hr>
 					<p> <?php echo $post_content ?> </p>
 					<a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-					<hr>							
-				<?php	} } ?>
+					<hr>
+				<?php	}  ?>
 
 
 			</div>
 
 				<!-- Blog Sidebar Widgets Column -->
 
-				<?php include "partials/sidebar.php"; ?> 
+				<?php include "partials/sidebar.php"; ?>
 
 
 				<!--  End side bar-->
 
   </div>
         <!-- /.row -->
+
         <hr>
-
-<!--        PAGINATION-->
-     <ul class="pager">
-    <?php
-			 for($i = 1; $i<= $count; $i++ ) {
-
-				 if($i == $page) {
-
-					 echo "<li><a class='active_link' href='index.php?page=$i'>{$i}</a></li>";
-				 } else {
-
-					 echo "<li><a href='index.php?page=$i'>{$i}</a></li>";
-				 }
-
-			 }
-		?>
-     </ul>
-
-
         <!--Footer located in includes folder-->
-        
+
 				<?php include "/partials/footer.php"; ?>
-				
-				
+
+
