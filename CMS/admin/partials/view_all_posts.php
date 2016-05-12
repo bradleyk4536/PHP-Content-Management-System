@@ -26,6 +26,32 @@
 					$delete_post = mysqli_query($connection, $query);
 					confirm($delete_post);
 				break;
+
+				case 'Clone':
+					$query = "SELECT * FROM posts WHERE post_id = {$postValueId} ";
+					$select_query = mysqli_query($connection, $query);
+					while($row = mysqli_fetch_array($select_query)) {
+						$post_title = $row['post_title'];
+						$post_category_id = $row['post_category_id'];
+						$post_date = $row['post_date'];
+						$post_author = $row['post_author'];
+						$post_status = $row['post_status'];
+						$post_image = $row['post_image'];
+						$post_tags = $row['post_tags'];
+						$post_content = $row['post_content'];
+					}
+
+						$clone_query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status) ";
+
+						$clone_query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_tags}', '{$post_content}', '{$post_status}') ";
+
+						$copy_query = mysqli_query($connection, $clone_query);
+
+						if(!$copy_query) {
+
+							die("QUERY FAILED" . mysqli_error($connection));
+						}
+				break;
 			}
 		}
 	}
@@ -38,13 +64,13 @@
 		<option value="Published">Publish</option>
 		<option value="Draft">Draft</option>
 		<option value="Delete">Delete</option>
+		<option value="Clone">Clone</option>
 	</select>
 </div>
 	<div class="col-xs-4">
 		<input type="submit" class="btn btn-success" name="submit" value="Apply">
 		<a href="posts.php?source=add_post" class="btn btn-primary">Add New</a>
 	</div>
-
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -65,7 +91,7 @@
 		</thead>
 		<tbody>
 <?php
-	$query = "SELECT * FROM posts";
+	$query = "SELECT * FROM posts ORDER BY post_id DESC";
 	$select_posts = mysqli_query($connection, $query);
 	while($row = mysqli_fetch_assoc($select_posts)) {
 	$post_id = $row['post_id'];
@@ -80,7 +106,6 @@
 		echo "<tr>";
 		?>
 		<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id ?>'></td>
-
 		<?php
 		echo "<td>{$post_id}</td>";
 		echo "<td>{$post_author}</td>";
@@ -108,7 +133,6 @@
 </form>
 <!--					Delete function-->
 					<?php
-
 						if(isset($_GET['delete'])) {
 							$delete_post_id = $_GET['delete'];
 							$query = "DELETE FROM posts WHERE post_id = {$delete_post_id} ";
@@ -116,5 +140,4 @@
 							confirm($delete_query);
 							header("location: posts.php");
 						}
-
 						?>
