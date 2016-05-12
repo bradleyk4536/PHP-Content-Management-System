@@ -19,7 +19,11 @@
 				if(isset($_GET['p_id'])) {
 
 					$the_post_id = $_GET['p_id'];
-				}
+
+						$view_query = "UPDATE posts SET post_views_count = post_views_count + 1 ";
+						$view_query .= "WHERE post_id = $the_post_id ";
+				    $send_query = mysqli_query($connection, $view_query);
+
 						$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
 						$select_all_post_query = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
@@ -42,7 +46,14 @@
 					<hr>
 					<p> <?php echo $post_content ?> </p>
 					<hr>
-				<?php	} ?>
+				<?php	}
+
+				} else {
+
+					header("Location: index.php");
+				}
+
+				?>
 
 <!-- Blog Comments -->
 
