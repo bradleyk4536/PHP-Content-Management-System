@@ -98,7 +98,7 @@ if(isset($_GET['p_id'])) {
 		<option value='<?php echo $post_status ?>'><?php echo $post_status ?></option>
 
 		<?php
-			if($post_status == 'published') {
+			if($post_status == 'Published') {
 
 				echo "<option value='Draft'>Draft</option>";
 

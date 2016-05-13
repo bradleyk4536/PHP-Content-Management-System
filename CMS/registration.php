@@ -15,16 +15,19 @@
 		$email 		= mysqli_real_escape_string($connection, $email);
 		$password = mysqli_real_escape_string($connection, $password);
 
+//		new password update
+		$password = password_hash( $password, PASSWORD_BCRYPT, array('cost => 12') );
+
 //		check fields are not empty
 		if(!empty($username) && !empty($email) && !empty ($password)) {
 
 //			encrypt password
-						$query = "SELECT randSalt FROM users";
-						$select_randsalt_query = mysqli_query($connection, $query);
-						if(!$select_randsalt_query) { die("QUERY FAILED" . mysqli_error($connection)); }
-						$row = mysqli_fetch_array($select_randsalt_query);
-						$salt = $row['randSalt'];
-						$password = crypt($password, $salt);
+//						$query = "SELECT randSalt FROM users";
+//						$select_randsalt_query = mysqli_query($connection, $query);
+//						if(!$select_randsalt_query) { die("QUERY FAILED" . mysqli_error($connection)); }
+//						$row = mysqli_fetch_array($select_randsalt_query);
+//						$salt = $row['randSalt'];
+//						$password = crypt($password, $salt);
 
 //			insert data into database
 						$query = "INSERT INTO users (username, user_email, user_password, user_role) ";

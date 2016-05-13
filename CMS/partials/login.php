@@ -34,14 +34,11 @@
 			$db_user_role = $row['user_role'];
 		}
 //		decrypt password for login
-			$password = crypt($password, $db_user_password);
+//			$password = crypt($password, $db_user_password);
 
 //		check username and password in database with username and password entered
 
-		if($username !== $db_username && $password !== $db_user_password) {
-
-		header("Location: ../index.php ");
-		} else if ($username == $db_username && $password == $db_user_password) {
+			if(password_verify($password, $db_user_password)) {
 
 //			set the sessions
 

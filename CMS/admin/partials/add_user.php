@@ -10,6 +10,10 @@
 		$username = $_POST['username'];
 		$user_email = $_POST['user_email'];
 		$user_password = $_POST['user_password'];
+
+//		password encryption
+			$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost => 10') );
+
 //		$user_date = date('d-m-y');
 //		move_uploaded_file($post_image_temp, "../images/$post_image");
 		$query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";

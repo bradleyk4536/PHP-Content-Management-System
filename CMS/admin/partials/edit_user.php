@@ -13,7 +13,8 @@ if(isset($_GET['edit_user'])) {
 					$user_image = $row['user_image'];
 					$user_role = $row['user_role'];
 					}
-	}
+	?>
+	<?php
 	if(isset($_POST['edit_user'])) {
 					$user_firstname = $_POST['user_firstname'];
 					$user_lastname = $_POST['user_lastname'];
@@ -22,17 +23,19 @@ if(isset($_GET['edit_user'])) {
 					$user_email = $_POST['user_email'];
 					$user_password = $_POST['user_password'];
 
-		//get salt from database
-					$salt_query = "SELECT randSalt FROM users ";
-					$get_rand_salt = mysqli_query($connection, $salt_query);
-					if(!$get_rand_salt){
-						die("Query FAILED" . mysqli_error($connection));
-					}
-					$row = mysqli_fetch_array($get_rand_salt);
-					$salt = $row['randSalt'];
-					$hash_password = crypt($user_password, $salt);
 
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
+					if(!empty($user_password)) {
+						$query_password = "SELECT user_password FROM users WHERE user_id = $edit_user_id";
+						$get_user = mysqli_query($connection, $query_password);
+						confirm($get_user);
+						$row = mysqli_fetch_array($get_user);
+						$db_user_password = $row['user_password'];
+						if($db_user_password != $user_password) {
+							$hash_password = password_hash( $user_password, PASSWORD_BCRYPT, array('cost => 12') );
+						}
+
+						//					move_uploaded_file($post_image_temp, "../images/$post_image");
 					$update_user_query = "UPDATE users SET ";
 					$update_user_query .="user_firstname = '{$user_firstname}', ";
 					$update_user_query .="user_lastname = '{$user_lastname}', ";
@@ -43,8 +46,13 @@ if(isset($_GET['edit_user'])) {
 					$update_user_query .= "WHERE user_id = {$edit_user_id} ";
 					$update_user = mysqli_query($connection, $update_user_query);
 					confirm($update_user);
+					}
 	}
 
+} else {
+
+	header("Location: index.php");
+}
 
 ?>
 	<form action="" method="post" enctype="multipart/form-data">
