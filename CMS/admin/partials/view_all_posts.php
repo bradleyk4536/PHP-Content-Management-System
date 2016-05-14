@@ -34,16 +34,16 @@
 						$post_title = $row['post_title'];
 						$post_category_id = $row['post_category_id'];
 						$post_date = $row['post_date'];
-						$post_author = $row['post_author'];
+						$post_user = $row['post_user'];
 						$post_status = $row['post_status'];
 						$post_image = $row['post_image'];
 						$post_tags = $row['post_tags'];
 						$post_content = $row['post_content'];
 					}
 
-						$clone_query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status) ";
+						$clone_query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_tags, post_content, post_status) ";
 
-						$clone_query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_tags}', '{$post_content}', '{$post_status}') ";
+						$clone_query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_user}', now(), '{$post_image}', '{$post_tags}', '{$post_content}', '{$post_status}') ";
 
 						$copy_query = mysqli_query($connection, $clone_query);
 
@@ -76,7 +76,7 @@
 			<tr>
 				<th><input id="selectAllBoxes" type="checkbox"></th>
 				<th>Id</th>
-				<th>Author</th>
+				<th>Users</th>
 				<th>Title</th>
 				<th>Category</th>
 				<th>Status</th>
@@ -97,6 +97,7 @@
 	while($row = mysqli_fetch_assoc($select_posts)) {
 	$post_id = $row['post_id'];
 	$post_author = $row['post_author'];
+	$post_user = $row['post_user'];
 	$post_title = $row['post_title'];
 	$post_category_id = $row['post_category_id'];
 	$post_status = $row['post_status'];
@@ -110,7 +111,15 @@
 		<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id ?>'></td>
 		<?php
 		echo "<td>{$post_id}</td>";
-		echo "<td>{$post_author}</td>";
+
+		if(!empty($post_author)){
+			echo "<td>{$post_author}</td>";
+		} elseif(!empty($post_user)) {
+			echo "<td>{$post_user}</td>";
+		}
+
+
+
 		echo "<td>{$post_title}</td>";
 	$query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
 	$edit_catagories = mysqli_query($connection, $query);
