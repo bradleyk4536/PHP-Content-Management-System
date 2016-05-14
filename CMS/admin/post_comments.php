@@ -68,12 +68,9 @@
 //remember to link to a given post you have to get the id of the post which incase is $post_id
 //							echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
 						}
-
-
-
-						echo "<td><a href='comments.php?approved=$comment_id'>Approved</a></td>";
-						echo "<td><a href='comments.php?unapproved=$comment_id'>Unapproved</a></td>";
-						echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
+						echo "<td><a href='post_comments.php?approved=$comment_id&id=" . $_GET['id'] ."'>Approved</a></td>";
+						echo "<td><a href='post_comments.php?unapproved=$comment_id&id=" . $_GET['id'] ."'>Unapproved</a></td>";
+						echo "<td><a href='post_comments.php?delete=$comment_id&id=" . $_GET['id'] ."'>Delete</a></td>";
 						echo "</tr>";
 					}
 				?>
@@ -87,28 +84,28 @@
 			$query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id} ";
 			$delete_query = mysqli_query($connection, $query);
 			confirm($delete_query);
-			header("Location: comments.php");
+//			to redirect to same page must pass in get request id
+			header("Location: post_comments.php?id=" . $_GET['id'] ."");
 		}
 //							Set approved and unapproved in comments table
-
 			if(isset($_GET['unapproved'])) {
 			$the_comment_id = $_GET['unapproved'];
-			$query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $the_comment_id ";
+			$query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $the_comment_id ";
 			$unapproved_comment_query = mysqli_query($connection, $query);
 			confirm($unapproved_comment_query);
-			header("Location: comments.php");
+//				to redirect to same page must pass in get request id
+			header("Location: post_comments.php?id=" . $_GET['id'] ."");
 			}
 
 			if(isset($_GET['approved'])) {
 			$the_comment_id = $_GET['approved'];
-			$query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_comment_id ";
+			$query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $the_comment_id ";
 			$approved_comment_query = mysqli_query($connection, $query);
 			confirm($approved_comment_query);
-			header("Location: comments.php");
+//				to redirect to same page must pass in get request id
+			header("Location: post_comments.php?id=" . $_GET['id'] ."");
 		}
-
 		?>
-
 				</div>
 			</div>
 				<!-- /.row -->

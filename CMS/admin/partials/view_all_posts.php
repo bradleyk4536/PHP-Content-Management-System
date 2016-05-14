@@ -125,8 +125,8 @@
 
 		$query = "SELECT * FROM comments WHERE comment_post_id = $post_id ";
 		$send_comment_query = mysqli_query($connection, $query);
-		$row = mysqli_fetch_array($send_comment_query);
-		$comment_id = $row['comment_id'];
+//		$row = mysqli_fetch_array($send_comment_query);
+//		$comment_id = $row['comment_id'];
 		$count_comments = mysqli_num_rows($send_comment_query);
 
 
