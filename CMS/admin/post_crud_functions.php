@@ -15,7 +15,7 @@ function confirm($result) {
 function escape($string){
 	global $connection;
 
-	$clean_field = mysql_real_escape_string($connection trim(strip_tags($string)));
+	$clean_field = mysqli_real_escape_string($connection, trim(strip_tags($string)));
 	return $clean_field;
 }
 ?>
