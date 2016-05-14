@@ -78,8 +78,6 @@ if(isset($_GET['edit_user'])) {
 					?>
 			</select>
 		</div>
-
-
 <!--
 		<div class="form-group">
 		<label for="post_image"></label>
