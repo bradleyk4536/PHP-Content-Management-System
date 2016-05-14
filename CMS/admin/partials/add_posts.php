@@ -28,6 +28,7 @@
 		<input type="text" class="form-control" name="title">
 		</div>
 		<div class="form-group">
+		<label for="post_category">Category</label>
 			<select name="post_category" id="">
 		<!--		populate category dropdown -->
 				<?php
@@ -44,7 +45,20 @@
 	</div>
 		<div class="form-group">
 		<label for="author">Post Author</label>
-		<input type="text" class="form-control" name="author">
+		<select name="author" id="">
+			<?php
+				$get_users_query = "SELECT * FROM users ";
+				$select_users = mysqli_query($connection, $get_users_query);
+				confirm($select_users);
+				while($row = mysqli_fetch_assoc($select_users)) {
+					$user_id = $row['user_id'];
+					$username = $row['username'];
+					echo "<option value='$user_id'>{$username}</option>";
+				}
+			?>
+
+		</select>
+
 		</div>
 		<div class="form-group">
 		<select name="post_status" id="" class="form-control">
