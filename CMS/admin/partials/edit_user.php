@@ -1,27 +1,28 @@
 <?php
 if(isset($_GET['edit_user'])) {
-	 $edit_user_id = $_GET['edit_user'];
-					$query = "SELECT * FROM users WHERE user_id =  $edit_user_id ";
-					$edit_users = mysqli_query($connection, $query);
+	 $edit_user_id 						= escape($_GET['edit_user']);
+					$query 						= "SELECT * FROM users WHERE user_id =  $edit_user_id ";
+					$edit_users 			= mysqli_query($connection, $query);
+
 					while($row = mysqli_fetch_assoc($edit_users)) {
-					$user_id = $row['user_id'];
-					$username = $row['username'];
-					$user_password = $row['user_password'];
-					$user_firstname = $row['user_firstname'];
-					$user_lastname = $row['user_lastname'];
-					$user_email = $row['user_email'];
-					$user_image = $row['user_image'];
-					$user_role = $row['user_role'];
+					$user_id 					= $row['user_id'];
+					$username 				= $row['username'];
+					$user_password 		= $row['user_password'];
+					$user_firstname 	= $row['user_firstname'];
+					$user_lastname 		= $row['user_lastname'];
+					$user_email 			= $row['user_email'];
+					$user_image 			= $row['user_image'];
+					$user_role 				= $row['user_role'];
 					}
 	?>
 	<?php
 	if(isset($_POST['edit_user'])) {
-					$user_firstname = $_POST['user_firstname'];
-					$user_lastname = $_POST['user_lastname'];
-					$user_role = $_POST['user_role'];
-					$username = $_POST['username'];
-					$user_email = $_POST['user_email'];
-					$user_password = $_POST['user_password'];
+					$user_firstname 	= escape($_POST['user_firstname']);
+					$user_lastname 		= escape($_POST['user_lastname']);
+					$user_role 				= escape($_POST['user_role']);
+					$username 				= escape($_POST['username']);
+					$user_email 			= escape($_POST['user_email']);
+					$user_password 		= escape($_POST['user_password']);
 
 
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
@@ -30,9 +31,13 @@ if(isset($_GET['edit_user'])) {
 						$get_user = mysqli_query($connection, $query_password);
 						confirm($get_user);
 						$row = mysqli_fetch_array($get_user);
+
 						$db_user_password = $row['user_password'];
 						if($db_user_password != $user_password) {
 							$hash_password = password_hash( $user_password, PASSWORD_BCRYPT, array('cost => 12') );
+						} else {
+
+							$hash_password = $db_user_password;
 						}
 
 						//					move_uploaded_file($post_image_temp, "../images/$post_image");

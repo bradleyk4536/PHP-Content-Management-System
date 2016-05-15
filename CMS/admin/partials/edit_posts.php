@@ -3,36 +3,34 @@
 
 if(isset($_GET['p_id'])) {
 
-	$update_query_id = $_GET['p_id'];
+	$update_query_id = escape($_GET['p_id']);
 
 }
 					$query = "SELECT * FROM posts WHERE post_id = $update_query_id ";
 					$select_posts_by_id = mysqli_query($connection, $query);
 
 					while($row = mysqli_fetch_assoc($select_posts_by_id)) {
-						$post_id = $row['post_id'];
-						$post_user = $row['post_user'];
-						$post_title = $row['post_title'];
+						$post_id 					= $row['post_id'];
+						$post_user 				= $row['post_user'];
+						$post_title 			= escape($row['post_title']);
 						$post_category_id = $row['post_category_id'];
-						$post_status = $row['post_status'];
-						$post_image = $row['post_image'];
-						$post_content = $row['post_content'];
-						$post_tags = $row['post_tags'];
-						$post_comments = $row['post_comment_count'];
-						$post_date = $row['post_date'];
+						$post_status 			= $row['post_status'];
+						$post_image 			= $row['post_image'];
+						$post_content 		= $row['post_content'];
+						$post_tags 				= $row['post_tags'];
+						$post_comments 		= $row['post_comment_count'];
+						$post_date 				= $row['post_date'];
 					}
 	if(isset($_POST['create_post'])) {
 
-					$post_title = $_POST['post_title'];
-					$post_user = $_POST['post_user'];
-					$post_category_id = $_POST['post_category'];
-					$post_status = $_POST['post_status'];
-
-					$post_image = $_FILES['post_image']['name'];
-					$post_image_temp = $_FILES['post_image']['tmp_name'];
-
-					$post_content = $_POST['post_content'];
-					$post_tags = $_POST['post_tags'];
+					$post_title 			= escape($_POST['post_title']);
+					$post_user 				= escape($_POST['post_user']);
+					$post_category_id = escape($_POST['post_category']);
+					$post_status 			= escape($_POST['post_status']);
+					$post_image 			= escape($_FILES['post_image']['name']);
+					$post_image_temp 	= escape($_FILES['post_image']['tmp_name']);
+					$post_content 		= $_POST['post_content'];
+					$post_tags 				= escape($_POST['post_tags']);
 
 					move_uploaded_file($post_image_temp, "../images/$post_image");
 

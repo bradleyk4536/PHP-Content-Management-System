@@ -4,7 +4,7 @@
     <label for="cat_title">Update Category</label>
 			<?php
 				if(isset($_GET['edit'])) {
-				$edit_record_id = $_GET['edit'];
+				$edit_record_id = escape($_GET['edit']);
 				$query = "SELECT * FROM categories WHERE cat_id = $edit_record_id ";
 				$edit_catagories = mysqli_query($connection, $query);
 				while($row = mysqli_fetch_assoc($edit_catagories)) {
@@ -17,7 +17,7 @@
 <!--            UPDATE CATEGORY QUERY-->
 				<?php
 					if(isset($_POST['update_category'])) {
-					$the_cat_title = $_POST['cat_title'];
+					$the_cat_title = escape($_POST['cat_title']);
 					$query = "UPDATE categories SET cat_title = '{$the_cat_title}' WHERE cat_id = {$cat_id} ";
 					$update_query = mysqli_query($connection, $query);
 						if(!$update_query){

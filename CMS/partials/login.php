@@ -1,8 +1,8 @@
 <?php include "../database/db.php"; ?>
-
 <!--/turn on sessions for use-->
 
 <?php session_start(); ?>
+
 
 <?php
 	if(isset($_POST['login'])) {

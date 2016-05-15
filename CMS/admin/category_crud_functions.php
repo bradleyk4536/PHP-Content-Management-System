@@ -4,7 +4,7 @@
 //  Check to see if submit button is clicked
 							if(isset($_POST['submit'])) {
 //	read the category input field
-								$cat_title = $_POST['cat_title'];
+								$cat_title = escape($_POST['cat_title']);
 //	check to see if field is empty if so echo message
 								if($cat_title == "" || empty($cat_title)) {
 									echo "This field should not be empty";
@@ -38,18 +38,24 @@
 	function update_category(){
 		global $connection;
 		if(isset($_GET['edit'])) {
-			$cat_id = $_GET['edit'];
+			$cat_id = escape($_GET['edit']);
 			include "partials/update_categories.php";
 			}
 	}
 	function delete_category(){
 		global $connection;
 		if(isset($_GET['delete'])) {
-			$del_cat_id = $_GET['delete'];
-			$query = "DELETE FROM categories WHERE cat_id = {$del_cat_id} ";
-			$delete_query = mysqli_query($connection, $query);
+			if(isset($_SESSION['user_role'])) {
+				if($_SESSION['user_role'] == 'admin') {
+					$del_cat_id = escape($_GET['delete']);
+					$query = "DELETE FROM categories WHERE cat_id = {$del_cat_id} ";
+					$delete_query = mysqli_query($connection, $query);
 //								refresh page so you do not have to click twice
-			header("Location: categories.php");
+					header("Location: categories.php");
+
+				}
+			}
+
 		}
 	}
 ?>

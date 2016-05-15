@@ -3,7 +3,7 @@
 
 		foreach($_POST['checkBoxArray'] as $postValueId) {
 
-			$bulk_options = $_POST['bulk_options'];
+			$bulk_options = escape($_POST['bulk_options']);
 
 			switch($bulk_options) {
 
@@ -118,8 +118,6 @@
 			echo "<td>{$post_user}</td>";
 		}
 
-
-
 		echo "<td>{$post_title}</td>";
 	$query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
 	$edit_catagories = mysqli_query($connection, $query);
@@ -154,7 +152,7 @@
 <!--					Delete function-->
 					<?php
 						if(isset($_GET['delete'])) {
-							$delete_post_id = $_GET['delete'];
+							$delete_post_id = escape($_GET['delete']);
 							$query = "DELETE FROM posts WHERE post_id = {$delete_post_id} ";
 							$delete_query = mysqli_query($connection, $query);
 							confirm($delete_query);
@@ -165,7 +163,7 @@
 						<?php
 							if(isset($_GET['reset'])) {
 
-								$reset_views_id = $_GET['reset'];
+								$reset_views_id = escape($_GET['reset']);
 								$query = "UPDATE posts SET post_views_count = 0 ";
 								$query .= "WHERE post_id =" . mysql_real_escape_string($reset_views_id) . " ";
 								$reset_query = mysqli_query($connection, $query);

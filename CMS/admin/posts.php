@@ -1,6 +1,8 @@
 <?php include "partials/admin_header.php" ?>
 	<div id="wrapper">
 <?php include "partials/admin_navigation.php" ?>
+<?php session_start(); ?>
+
 	<div id="page-wrapper">
 		<div class="container-fluid">
 			<!-- Page Heading -->

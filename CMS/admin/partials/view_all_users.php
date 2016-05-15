@@ -67,9 +67,8 @@
 		if(isset($_GET['delete'])) {
 
 			if(isset($_SESSION['user_role'])){
-
 				if($_SESSION['user_role'] == 'admin'){
-					$delete_user_id = mysqli_real_escape_string($_GET['delete']);
+					$delete_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
 					$query = "DELETE FROM users WHERE user_id = {$delete_user_id} ";
 					$delete_query = mysqli_query($connection, $query);
 					confirm($delete_query);
@@ -77,6 +76,7 @@
 				}
 			}
 		}
+
 //							Set approved and unapproved in comments table
 
 			if(isset($_GET['change_to_admin'])) {

@@ -11,11 +11,13 @@ function confirm($result) {
 		die("UNABLE TO CREATE" . mysqli_error($connection));
 	}
 }
-
 function escape($string){
 	global $connection;
-
-	$clean_field = mysqli_real_escape_string($connection, trim(strip_tags($string)));
-	return $clean_field;
+	if(isset($_SESSION['user_role'])) {
+		if($_SESSION['user_role'] == 'subscriber' || $_SESSION['user_role'] == 'admin') {
+		$clean_field = mysqli_real_escape_string($connection, trim(strip_tags($string)));
+		return $clean_field;
+		}
+	}
 }
 ?>

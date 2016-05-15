@@ -8,7 +8,7 @@
 		$select_user_profile = mysqli_query($connection, $query);
 		while($row = mysqli_fetch_assoc($select_user_profile)) {
 
-					$user_id = $row['user_id'];
+					$user_id = escape($row['user_id']);
 					$username = $row['username'];
 					$user_password = $row['user_password'];
 					$user_firstname = $row['user_firstname'];
@@ -21,12 +21,12 @@
 ?>
 <?php
 	if(isset($_POST['edit_user'])) {
-					$user_firstname = $_POST['user_firstname'];
-					$user_lastname = $_POST['user_lastname'];
-					$user_role = $_POST['user_role'];
-					$username = $_POST['username'];
-					$user_email = $_POST['user_email'];
-					$user_password = $_POST['user_password'];
+					$user_firstname = escape($_POST['user_firstname']);
+					$user_lastname = escape($_POST['user_lastname']);
+					$user_role = escape($_POST['user_role']);
+					$username = escape($_POST['username']);
+					$user_email = escape($_POST['user_email']);
+					$user_password = escape($_POST['user_password']);
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
 					$update_user_query = "UPDATE users SET ";
 					$update_user_query .="user_firstname = '{$user_firstname}', ";

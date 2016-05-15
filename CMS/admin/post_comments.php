@@ -80,30 +80,35 @@
 	<?php
 
 		if(isset($_GET['delete'])) {
-			$delete_comment_id = $_GET['delete'];
-			$query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id} ";
-			$delete_query = mysqli_query($connection, $query);
-			confirm($delete_query);
-//			to redirect to same page must pass in get request id
-			header("Location: post_comments.php?id=" . $_GET['id'] ."");
+			if(isset($_SESSION['user_role'])) {
+				if($_SESSION['user_role'] == 'admin') {
+					$delete_comment_id = escape($_GET['delete']);
+					$query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id} ";
+					$delete_query = mysqli_query($connection, $query);
+					confirm($delete_query);
+		//			to redirect to same page must pass in get request id
+					header("Location: post_comments.php?id=" . escape($_GET['id']) ."");
+				}
+			}
+
 		}
 //							Set approved and unapproved in comments table
 			if(isset($_GET['unapproved'])) {
-			$the_comment_id = $_GET['unapproved'];
+			$the_comment_id = escape($_GET['unapproved']);
 			$query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $the_comment_id ";
 			$unapproved_comment_query = mysqli_query($connection, $query);
 			confirm($unapproved_comment_query);
 //				to redirect to same page must pass in get request id
-			header("Location: post_comments.php?id=" . $_GET['id'] ."");
+			header("Location: post_comments.php?id=" . escape($_GET['id']) ."");
 			}
 
 			if(isset($_GET['approved'])) {
-			$the_comment_id = $_GET['approved'];
+			$the_comment_id = escape($_GET['approved']);
 			$query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $the_comment_id ";
 			$approved_comment_query = mysqli_query($connection, $query);
 			confirm($approved_comment_query);
 //				to redirect to same page must pass in get request id
-			header("Location: post_comments.php?id=" . $_GET['id'] ."");
+			header("Location: post_comments.php?id=" . escape($_GET['id']) ."");
 		}
 		?>
 				</div>

@@ -1,7 +1,7 @@
 <!--DOCTYPE head located in includes folder-->
 <?php include "database/db.php"; ?>
 <?php include "partials/header.php"; ?>
-
+<?php include "admin/post_crud_functions.php"; ?>
 <!--		Navigation located in includes folder -->
 
 <?php include "partials/navigation.php"; ?>
@@ -18,17 +18,17 @@
 
 				if(isset($_GET['p_id'])) {
 
-					$the_post_id = $_GET['p_id'];
+					$the_post_id = escape($_GET['p_id']);
 
-////						$view_query = "UPDATE posts SET post_views_count = post_views_count + 1 ";
-////						$view_query .= "WHERE post_id = $the_post_id ";
-//				    $send_query = mysqli_query($connection, $view_query);
+							$view_query = "UPDATE posts SET post_views_count = post_views_count + 1 ";
+							$view_query .= "WHERE post_id = $the_post_id ";
+				    	$send_query = mysqli_query($connection, $view_query);
 
 						$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
 						$select_all_post_query = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
 						$post_title = $row['post_title'];
-						$post_author = $row['post_author'];
+						$post_author = $row['post_user'];
 						$post_date = $row['post_date'];
 						$post_image = $row['post_image'];
 						$post_content = $row['post_content'];
@@ -66,9 +66,9 @@
 
 						$the_post_id = $_GET['p_id'];
 
-						$comment_author = $_POST['comment_author'];
-						$comment_email = $_POST['comment_email'];
-						$comment_content = $_POST['comment_content'];
+						$comment_author 	= escape($_POST['comment_author']);
+						$comment_email 		= escape($_POST['comment_email']);
+						$comment_content 	= escape($_POST['comment_content']);
 
 //						Check fields to see if filled out before running query
 
