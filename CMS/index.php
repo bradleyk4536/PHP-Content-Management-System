@@ -102,6 +102,6 @@
 
         <!--Footer located in includes folder-->
         
-				<?php include "/partials/footer.php"; ?>
+				<?php include "partials/footer.php"; ?>
 				
 				

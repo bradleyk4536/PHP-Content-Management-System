@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 
 <!--/turn on sessions for use-->
 

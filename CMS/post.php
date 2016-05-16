@@ -26,6 +26,7 @@
 
 						$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
 						$select_all_post_query = mysqli_query($connection, $query);
+						confirm($select_all_post_query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
 						$post_title = $row['post_title'];
 						$post_author = $row['post_user'];
@@ -165,6 +166,6 @@
         <hr>
         <!--Footer located in includes folder-->
 
-				<?php include "/partials/footer.php"; ?>
+				<?php include "partials/footer.php"; ?>
 
 

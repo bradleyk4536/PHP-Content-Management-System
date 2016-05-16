@@ -17,6 +17,8 @@
 					$user_image = $row['user_image'];
 					$user_role = $row['user_role'];
 		}
+//		STORING TEMP PASSWORD SO I CAN TEST IT FOR ENCRYPTION
+		$temp_password = $user_password;
 	}
 ?>
 <?php
@@ -27,6 +29,11 @@
 					$username = escape($_POST['username']);
 					$user_email = escape($_POST['user_email']);
 					$user_password = escape($_POST['user_password']);
+
+//					encrypt password
+						if($temp_password !== $user_password) {
+							$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost => 12'));
+						}
 //					move_uploaded_file($post_image_temp, "../images/$post_image");
 					$update_user_query = "UPDATE users SET ";
 					$update_user_query .="user_firstname = '{$user_firstname}', ";

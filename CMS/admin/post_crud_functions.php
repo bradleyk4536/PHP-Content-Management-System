@@ -13,11 +13,7 @@ function confirm($result) {
 }
 function escape($string){
 	global $connection;
-	if(isset($_SESSION['user_role'])) {
-		if($_SESSION['user_role'] == 'subscriber' || $_SESSION['user_role'] == 'admin') {
 		$clean_field = mysqli_real_escape_string($connection, trim(strip_tags($string)));
 		return $clean_field;
 		}
-	}
-}
 ?>
