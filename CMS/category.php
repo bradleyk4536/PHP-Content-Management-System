@@ -54,7 +54,6 @@
 
 
 			</div>
-
 				<!-- Blog Sidebar Widgets Column -->
 
 				<?php include "partials/sidebar.php"; ?>
@@ -68,6 +67,6 @@
         <hr>
         <!--Footer located in includes folder-->
 
-				<?php include "/partials/footer.php"; ?>
+				<?php include "partials/footer.php"; ?>
 
 

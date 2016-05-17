@@ -9,11 +9,11 @@
 		$post_image_temp 	= escape($_FILES['post_image']['tmp_name']);
 		$post_tags 				= escape($_POST['post_tags']);
 		$post_content 		= $_POST['post_content'];
-		$post_date 				= date('d-m-y');
+		//$post_date 				= date(y-m-d);
 
 		move_uploaded_file($post_image_temp, "../images/$post_image");
 		$query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_content, post_tags, post_status) ";
-		$query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_user}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}' )";
+		$query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_user}', NOW(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}' )";
 		$create_post_query = mysqli_query($connection, $query);
 		confirm($create_post_query);
 

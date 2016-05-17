@@ -24,10 +24,8 @@ if(isset($_POST['login'])) {
 
 			die("QUERY FAILED" . mysqli_error($connection));
 		}
-
 		while($row = mysqli_fetch_array($select_user_query)) {
 //			pull information database
-
 			$db_user_id = $row['user_id'];
 			$db_username = $row['username'];
 			$db_user_password = $row['user_password'];
@@ -35,22 +33,19 @@ if(isset($_POST['login'])) {
 			$db_user_lastname = $row['user_lastname'];
 			$db_user_role = $row['user_role'];
 		}
-//		decrypt password for login
-//			$password = crypt($password, $db_user_password);
-
-//		check username and password in database with username and password entered
+		if(!empty($username) && !empty($password)) {
 
 			if(password_verify($password, $db_user_password)) {
-
 //			set the sessions
-
 			$_SESSION['username'] = $db_username;
 			$_SESSION['firstname'] = $db_user_firstname;
 			$_SESSION['lastname'] = $db_user_lastname;
 			$_SESSION['user_role'] = $db_user_role;
-
 			header("Location: ../admin");
-		} else {
+
+			} else { header("Location: ../index.php"); }
+
+		}	else {
 				header("Location: ../index.php");
 			}
 	}
