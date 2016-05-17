@@ -50,6 +50,8 @@
 <!--    used to display wysiwyg edit to application-->
 		<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 
+		<script src="js/jquery.js"></script>
+
 </head>
 
 <body>
