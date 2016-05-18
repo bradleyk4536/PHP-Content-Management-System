@@ -166,23 +166,17 @@
 						echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
 					}
 					?>
-
         ]);
-
         var options = {
           chart: {
             title: '',
             subtitle: '',
           }
         };
-
         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
         chart.draw(data, options);
       }
     </script>
-
-
         <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
 
         </div>

@@ -93,8 +93,18 @@ include("delete_modal.php");
 		</thead>
 		<tbody>
 <?php
-	$query = "SELECT * FROM posts ORDER BY post_id DESC";
+//	$query = "SELECT * FROM posts ORDER BY post_id DESC";
+
+//joining multiple tables
+
+$query = "SELECT posts.post_id, posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, ";
+$query .= "posts.post_tags, posts.post_comment_count, posts.post_date, posts.post_views_count, categories.cat_id, categories.cat_title ";
+$query .= " FROM posts ";
+$query .= " LEFT JOIN categories ON posts.post_category_id = categories.cat_id ";
+$query .= " ORDER BY posts.post_id DESC ";
+
 	$select_posts = mysqli_query($connection, $query);
+	confirm($select_posts);
 	while($row = mysqli_fetch_assoc($select_posts)) {
 	$post_id = $row['post_id'];
 	$post_author = $row['post_author'];
@@ -107,26 +117,21 @@ include("delete_modal.php");
 	$post_comments = $row['post_comment_count'];
 	$post_date = $row['post_date'];
 	$post_views_count = $row['post_views_count'];
+		//from virtual table
+	$category_title = $row['cat_title'];
+	$category_id = $row['cat_id'];
 		echo "<tr>";
 		?>
 		<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id ?>'></td>
 		<?php
 		echo "<td>{$post_id}</td>";
-
 		if(!empty($post_author)){
 			echo "<td>{$post_author}</td>";
 		} elseif(!empty($post_user)) {
 			echo "<td>{$post_user}</td>";
 		}
-
 		echo "<td>{$post_title}</td>";
-	$query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
-	$edit_catagories = mysqli_query($connection, $query);
-	while($row = mysqli_fetch_assoc($edit_catagories)) {
-	$cat_id = $row['cat_id'];
-	$cat_title = $row['cat_title'];
-		echo "<td>{$cat_title}</td>";
-	}
+		echo "<td>{$category_title}</td>";
 		echo "<td>{$post_status}</td>";
 		echo "<td><img width=100 src='../images/$post_image'></td>";
 		echo "<td>{$post_tags}</td>";
