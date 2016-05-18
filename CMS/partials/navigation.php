@@ -16,25 +16,44 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    
-
 					<!--                    add php links to application   -->
 						<?php
-									
 							$query = "SELECT * FROM categories";
-									
 							$select_all_catagories_query = mysqli_query($connection, $query);
-
 							while($row = mysqli_fetch_assoc($select_all_catagories_query)) {
-								
 								$cat_title = $row['cat_title'];
+								$cat_id = $row['cat_id'];
+
+//								Showing active links in dynamic navigation bar
+								$category_class 		= '';
+								$registration_class = '';
+								$contact_class = '';
+								$registration = 'registration.php';
+								$contact = 'contact.php';
 								
-								echo "<li><a href='#'>{$cat_title}</a></li>";	
+								$pageName = basename($_SERVER['PHP_SELF']);
+
+								if(isset($_GET['category']) && $_GET['category'] == $cat_id) {
+
+									$category_class = 'active';
+								}
+									switch($pageName) {
+
+										case $registration:
+											$registration_class = 'active';
+										break;
+
+										case $contact:
+											$contact_class = 'active';
+										break;
+
+									}
+								echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
 							}
 						?>
                     <li><a href="admin">Admin</a></li>
-                    <li><a href="registration.php">Registration</a></li>
-                    <li><a href="contact.php">Contact</a></li>
+                    <li class='<?php echo $registration_class ?>'><a href="registration.php">Registration</a></li>
+                    <li class='<?php echo $contact_class ?>'><a href="contact.php">Contact</a></li>
 				<?php
 					if(isset($_SESSION['user_role'])) {
 
