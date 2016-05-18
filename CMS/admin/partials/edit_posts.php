@@ -29,7 +29,7 @@ if(isset($_GET['p_id'])) {
 					$post_status 			= escape($_POST['post_status']);
 					$post_image 			= escape($_FILES['post_image']['name']);
 					$post_image_temp 	= escape($_FILES['post_image']['tmp_name']);
-					$post_content 		= $_POST['post_content'];
+					$post_content 		= escape($_POST['post_content']);
 					$post_tags 				= escape($_POST['post_tags']);
 
 					move_uploaded_file($post_image_temp, "../images/$post_image");
@@ -81,9 +81,17 @@ if(isset($_GET['p_id'])) {
 			while($row = mysqli_fetch_assoc($select_catagories)) {
 			$cat_id = $row['cat_id'];
 			$cat_title = $row['cat_title'];
-			echo "<option value='$cat_id'>{$cat_title}</option>";
+
+				if($cat_id == $post_category_id) {
+
+					echo "<option selected value={$cat_id}>{$cat_title}</option>";
+				} else {
+
+					echo "<option value={$cat_id}>{$cat_title}</option>";
+				}
 			}
 		?>
+
 	</select>
 	</div>
 <!--
@@ -149,7 +157,7 @@ if(isset($_GET['p_id'])) {
 
 	<div class="form-group">
   <label for="post_content">Post Content</label>
-	<textarea class="form-control" name="post_content" id="" cols="30" rows="10" ><?php echo $post_content; ?></textarea>
+	<textarea class="form-control" name="post_content" id="" cols="30" rows="10" ><?php echo str_replace('\r\n', '</br>', $post_content) ; ?></textarea>
 	</div>
 
 	<div class="form-group">
