@@ -11,7 +11,9 @@
 					<?php
 //				pagination system
 //				get total posts
-						$post_count_query = "SELECT * FROM posts WHERE post_status = 'published' ";
+
+
+						$post_count_query = "SELECT * FROM posts WHERE post_status = 'Published' ";
 						$find_count = mysqli_query($connection, $post_count_query);
 						$count = mysqli_num_rows($find_count);
 						if($count < 1) {
@@ -29,7 +31,14 @@
 						} else {
 							$page_1 = ($page * 5) - 5;
 						}
-						$query = "SELECT * FROM posts LIMIT $page_1, 5 ";
+//					restrict (hide) post with post_status set to draft when not logged in as admin.
+						if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+
+							$query = "SELECT * FROM posts LIMIT $page_1, 5 ";
+						}	else {
+							$query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+							$query .= "LIMIT $page_1, 5 ";
+						}
 						$select_all_post_query = mysqli_query($connection, $query);
 						while($row = mysqli_fetch_assoc($select_all_post_query)) {
 						$post_id = $row['post_id'];
