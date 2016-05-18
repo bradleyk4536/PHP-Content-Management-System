@@ -138,8 +138,6 @@ if(isset($_GET['p_id'])) {
 
 	</div>
 		</div>
-
-
 <!--
 	<input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
 	</div>

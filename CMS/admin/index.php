@@ -1,4 +1,5 @@
 <?php include "partials/admin_header.php" ?>
+<?php include "partials/admin_functions.php" ?>
 
     <div id="wrapper">
 
@@ -34,9 +35,7 @@
                     <div class="col-xs-9 text-right">
 <!--                    count number of post in databas-->
                     <?php
-											$query = "SELECT * FROM posts ";
-											$select_all_post = mysqli_query($connection, $query);
-											$post_counts = mysqli_num_rows($select_all_post);
+											$post_counts = recordCount('posts');
 											echo "<div class='huge'>{$post_counts}</div>";
 										?>
                         <div>Posts</div>
@@ -62,9 +61,7 @@
                     <div class="col-xs-9 text-right">
                     <?php
 //											get total comment count
-											$query = "SELECT * FROM comments ";
-											$comment_query = mysqli_query($connection, $query);
-											$get_comment_count = mysqli_num_rows($comment_query);
+											$get_comment_count = recordCount('comments');
 											echo "<div class='huge'>{$get_comment_count}</div>";
 										?>
                       <div>Comments</div>
@@ -89,9 +86,8 @@
                     </div>
                     <div class="col-xs-9 text-right">
                     <?php
-											$query = "SELECT * FROM users ";
-											$user_query = mysqli_query($connection, $query);
-											$get_user_count = mysqli_num_rows($user_query);
+//											show user count
+											$get_user_count = recordCount('users');
 											echo "<div class='huge'>{$get_user_count}</div>";
 										?>
                         <div> Users</div>
@@ -116,9 +112,8 @@
                     </div>
                     <div class="col-xs-9 text-right">
                       <?php
-												$query = "SELECT * FROM categories ";
-												$category_query = mysqli_query($connection, $query);
-												$get_category_count = mysqli_num_rows($category_query);
+//											show categories count
+												$get_category_count = recordCount('categories');
 												echo "<div class='huge'>{$get_category_count}</div>";
 											?>
                          <div>Categories</div>
@@ -139,26 +134,17 @@
  							<?php
 //							display how many published post in database
 
-								$query = "SELECT * FROM posts WHERE post_status = 'Published' ";
-								$select_all_published_posts = mysqli_query($connection, $query);
-								$post_published_count = mysqli_num_rows($select_all_published_posts);
 
+								$post_published_count = checkstatus('posts', 'post_status', 'Published');
 //							display how many draft post in database
-								$query = "SELECT * FROM posts WHERE post_status = 'Draft' ";
-								$select_all_draft_posts = mysqli_query($connection, $query);
-								$post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
+								$post_draft_count = checkstatus('posts', 'post_status', 'Draft');
 
-//							display how many draft post in database
-								$query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
-								$unapproved_comments = mysqli_query($connection, $query);
-								$unapproved_comments_count = mysqli_num_rows($unapproved_comments);
+//							display unapproved status
+								$unapproved_comments_count = checkstatus('comments', 'comment_status', 'unapproved');
 
-
-//							display how many draft post in database
-								$query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
-								$select_all_subscribers = mysqli_query($connection, $query);
-								$subscribers_count = mysqli_num_rows($select_all_subscribers);
+//							display total user for each role
+								$subscribers_count = checkstatus('users', 'user_role', 'subscriber');
 							?>
 
 <!--                Using google charts to display database status-->
