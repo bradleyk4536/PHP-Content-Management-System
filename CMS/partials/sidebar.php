@@ -17,23 +17,35 @@
 				</div>
 
 				<!-- Login -->
-				<div class="well">
+
+				<?php if(isset($_SESSION['user_role'])): ?>
+					<div class="well">
+						<h4>Logged in <?php echo $_SESSION['username']; ?></h4>
+						<a href="partials/logout.php" class="btn btn-primary">Logout</a>
+					</div>
+
+				<?php else: ?>
+
+					<div class="well">
 						<h4>Login</h4>
 <!--						Search form-->
-						<form action="partials/login.php" method="post">
-							<div class="form-group">
-								<input name="username" type="text" class="form-control" placeholder="Enter username">
+								<form action="partials/login.php" method="post">
+									<div class="form-group">
+										<input name="username" type="text" class="form-control" placeholder="Enter username">
 
-						</div>
-						<div class="input-group">
-								<input name="password" type="password" class="form-control" placeholder="Enter password">
-								<span class="input-group-btn">
-									<button class="btn btn-primary" name="login" type="submit">Submit</button>
-								</span>
-						</div>
-						</form> <!--End search form-->
-						<!-- /.input-group -->
+								</div>
+								<div class="input-group">
+										<input name="password" type="password" class="form-control" placeholder="Enter password">
+										<span class="input-group-btn">
+											<button class="btn btn-primary" name="login" type="submit">Submit</button>
+										</span>
+								</div>
+								</form> <!--End search form-->
+								<!-- /.input-group -->
 				</div>
+				<?php endif; ?>
+
+
 
 
 				<!-- Blog Categories Well -->
